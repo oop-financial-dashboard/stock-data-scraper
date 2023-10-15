@@ -6,6 +6,7 @@ import lombok.Data;
 
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 
 @Data
 public class StockDailyPriceRow {
@@ -15,5 +16,5 @@ public class StockDailyPriceRow {
     private String low;
     private String close;
     private String volume;
-    private Timestamp timestamp;
+    private LocalDate timestamp;
 }

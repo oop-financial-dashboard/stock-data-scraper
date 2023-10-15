@@ -12,6 +12,7 @@ import org.springframework.web.client.RestTemplate;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 @Data
@@ -43,8 +44,8 @@ public class FrontfillService {
             String low = res.getTimeSeriesDailyMap().get(lastRefreshed).getLow();
             String close = res.getTimeSeriesDailyMap().get(lastRefreshed).getClose();
             String volume = res.getTimeSeriesDailyMap().get(lastRefreshed).getVolume();
-            String dateFormat = res.getMetaData().getLastRefreshed() + " 00:00:00";
-            Timestamp date = Timestamp.valueOf(dateFormat);
+            String dateFormat = res.getMetaData().getLastRefreshed();
+            LocalDate date = LocalDate.parse(dateFormat);
 
             StockDailyPriceRow row = new StockDailyPriceRow();
             row.setSymbol(symbol);

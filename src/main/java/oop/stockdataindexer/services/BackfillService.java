@@ -13,6 +13,7 @@ import org.springframework.web.client.RestTemplate;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -42,8 +43,7 @@ public class BackfillService {
                 String low = stockData.getLow();
                 String close = stockData.getClose();
                 String volume = stockData.getVolume();
-                String dateWithTime = date + " 00:00:00";
-                Timestamp formattedDate = Timestamp.valueOf(dateWithTime);
+                LocalDate formattedDate = LocalDate.parse(date);
 
                 StockDailyPriceRow row = new StockDailyPriceRow();
                 row.setSymbol(symbol);

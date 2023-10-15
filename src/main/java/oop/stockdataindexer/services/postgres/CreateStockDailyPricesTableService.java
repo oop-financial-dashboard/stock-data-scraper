@@ -10,9 +10,9 @@ import java.sql.Statement;
 public class CreateStockDailyPricesTableService {
     private final String url = "jdbc:postgresql://localhost:5432/postgres";
     private final String user = "postgres";
-    private final String password = "";
+    private final String password = "mypassword";
 
-    private static final String createTableSQL = "CREATE TABLE IF NOT EXISTS stock_daily_prices " +
+    private static final String createTableSQL = "CREATE TABLE IF NOT EXISTS stock_daily_price" +
             "(symbol VARCHAR(50) NOT NULL ," +
             " open VARCHAR(50), " +
             " high VARCHAR(50), " +
@@ -38,7 +38,7 @@ public class CreateStockDailyPricesTableService {
 
             // Step 3: Execute the query or update query
             statement.execute(createTableSQL);
-            System.out.println("Created stock_daily_prices table!");
+            System.out.println("Created stock_daily_price table!");
         } catch (SQLException e) {
 
             // print SQL exception information

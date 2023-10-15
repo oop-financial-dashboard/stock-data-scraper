@@ -8,8 +8,8 @@ import java.sql.Statement;
 public class CreateStockDescriptionTableService {
     private final String url = "jdbc:postgresql://localhost:5432/postgres";
     private final String user = "postgres";
-    private final String password = "";
-    private static final String createTableSQL = "CREATE TABLE IF NOT EXISTS stock_descriptions " +
+    private final String password = "mypassword";
+    private static final String createTableSQL = "CREATE TABLE IF NOT EXISTS stock_description " +
             "(symbol VARCHAR(50) PRIMARY KEY ," +
             " exchange VARCHAR(50), " +
             " currency VARCHAR(50), " +

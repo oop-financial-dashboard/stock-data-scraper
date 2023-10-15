@@ -9,8 +9,8 @@ import java.sql.SQLException;
 public class InsertStockDailyPriceService {
     private final String url = "jdbc:postgresql://localhost:5432/postgres";
     private final String user = "postgres";
-    private final String password = "";
-    private static final String INSERT_USERS_SQL = "INSERT INTO stock_daily_prices" +
+    private final String password = "mypassword";
+    private static final String INSERT_USERS_SQL = "INSERT INTO stock_daily_price" +
             "  (symbol, open, high, low, close, volume, timestamp) VALUES " +
             " (?, ?, ?, ?, ?, ?, ?);";
     private StockDailyPriceRow stockDailyPriceRow;
@@ -19,20 +19,20 @@ public class InsertStockDailyPriceService {
         this.stockDailyPriceRow = stockDailyPriceRow;
     }
 
-
     public void insertRecord() throws SQLException {
         // Step 1: Establishing a Connection
         try (Connection connection = DriverManager.getConnection(url, user, password);
 
              // Step 2:Create a statement using connection object
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USERS_SQL)) {
-            preparedStatement.setString(1, this.stockDailyPriceRow.getSymbol());
-            preparedStatement.setString(2, this.stockDailyPriceRow.getOpen());
-            preparedStatement.setString(3, this.stockDailyPriceRow.getHigh());
-            preparedStatement.setString(4, this.stockDailyPriceRow.getLow());
-            preparedStatement.setString(5, this.stockDailyPriceRow.getClose());
-            preparedStatement.setString(6, this.stockDailyPriceRow.getVolume());
-            preparedStatement.setTimestamp(7, this.stockDailyPriceRow.getTimestamp());
+                preparedStatement.setString(1, this.stockDailyPriceRow.getSymbol());
+                preparedStatement.setString(2, this.stockDailyPriceRow.getOpen());
+                preparedStatement.setString(3, this.stockDailyPriceRow.getHigh());
+                preparedStatement.setString(4, this.stockDailyPriceRow.getLow());
+                preparedStatement.setString(5, this.stockDailyPriceRow.getClose());
+                preparedStatement.setString(6, this.stockDailyPriceRow.getVolume());
+                java.sql.Date sqlDate = java.sql.Date.valueOf(this.stockDailyPriceRow.getTimestamp());
+                preparedStatement.setDate(7, sqlDate);
 
 
             System.out.println(preparedStatement);
