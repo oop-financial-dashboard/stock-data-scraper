@@ -6,7 +6,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-@Service
+
 public class CreateStockDailyPricesTableService {
     private final String url = "jdbc:postgresql://localhost:5432/postgres";
     private final String user = "postgres";

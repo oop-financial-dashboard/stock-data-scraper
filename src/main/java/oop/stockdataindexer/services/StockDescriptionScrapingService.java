@@ -6,6 +6,7 @@ import oop.stockdataindexer.models.StockDescriptionRow;
 import oop.stockdataindexer.models.StockListing;
 import oop.stockdataindexer.models.alphaVantage.AlphaVantageDailyPrice;
 import oop.stockdataindexer.services.postgres.InsertStockDescriptionService;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 public class StockDescriptionScrapingService {
 
     public void ScrapeStockDescriptions() throws IOException {
+        System.out.println("DESCRIPTION SCRAPPER RUNNING");
         CSVReaderService x = new CSVReaderService();
         ArrayList<StockListing> Stocks = x.readCSV("src/main/resources/listing_status.csv");
         Stocks.forEach((stock)->{
@@ -24,9 +26,8 @@ public class StockDescriptionScrapingService {
             String apiUrl = String.format("https://www.alphavantage.co/query?function=OVERVIEW&symbol=%s&apikey=PGMGQLXTQWX42V8V", symbol);
             StockDescriptionRow res = restTemplate.getForObject(apiUrl, StockDescriptionRow.class);
             //TODO: throw error
-            if(res == null){
-                System.out.println("Failed to retireve daily stock price data from AlphaVantage");
-                System.out.println(stock.getSymbol());
+            if(res == null || res.getSymbol() == null){
+                System.out.printf("Failed to retrieve stock description data: %s from AlphaVantage%n", stock.getSymbol());
                 return;
             }
             InsertStockDescriptionService insertStockDescriptionService = new InsertStockDescriptionService(res);

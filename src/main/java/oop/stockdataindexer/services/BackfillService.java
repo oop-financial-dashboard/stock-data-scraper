@@ -5,6 +5,8 @@ import oop.stockdataindexer.models.StockListing;
 import oop.stockdataindexer.models.alphaVantage.AlphaVantageDailyPrice;
 import oop.stockdataindexer.models.alphaVantage.TimeSeriesDaily;
 import oop.stockdataindexer.services.postgres.InsertStockDailyPriceService;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -14,10 +16,10 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Map;
 
-@Service
+
 public class BackfillService {
     public void backfill() throws IOException, SQLException {
-
+        System.out.println("BACKFILL SCRAPPER RUNNING");
         CSVReaderService x = new CSVReaderService();
         ArrayList<StockListing> Stocks = x.readCSV("src/main/resources/listing_status.csv");
 
@@ -28,8 +30,7 @@ public class BackfillService {
             AlphaVantageDailyPrice res = restTemplate.getForObject(apiUrl, AlphaVantageDailyPrice.class);
             //TODO: throw error
             if(res == null || res.getMetaData() == null){
-                System.out.println("Failed to retireve daily stock price data from AlphaVantage");
-                System.out.println(stock.getSymbol());
+                System.out.printf("Failed to retrieve daily stock price data: %s from AlphaVantage", stock.getSymbol());
                 return;
             }
             Map<String, TimeSeriesDaily> timeSeriesDailyMap = res.getTimeSeriesDailyMap();

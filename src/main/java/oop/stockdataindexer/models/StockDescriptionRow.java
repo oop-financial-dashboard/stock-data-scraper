@@ -1,7 +1,5 @@
 package oop.stockdataindexer.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Id;
 import lombok.Data;
 
 @Data
