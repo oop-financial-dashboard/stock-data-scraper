@@ -39,7 +39,7 @@ public class Main extends SpringBootServletInitializer {
 //		return new CreateStockDescriptionTableService();
 //	}
 	public static void main(String[] args) throws SQLException, IOException {
-		
+
 		SpringApplication.run(Main.class, args);
 		CreateStockDailyPricesTableService createStockDailyPricesTable = new CreateStockDailyPricesTableService();
 		CreateStockDescriptionTableService createStockDescriptionTable = new CreateStockDescriptionTableService();

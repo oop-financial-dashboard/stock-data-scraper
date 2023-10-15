@@ -34,8 +34,13 @@ public class BackfillService {
                 System.out.printf("Failed to retrieve daily stock price data: %s from AlphaVantage", stock.getSymbol());
                 return;
             }
+            boolean firstIteration = true;
             Map<String, TimeSeriesDaily> timeSeriesDailyMap = res.getTimeSeriesDailyMap();
             for (Map.Entry<String, TimeSeriesDaily> entry : timeSeriesDailyMap.entrySet()){
+                if (firstIteration){
+                    firstIteration = false;
+                    continue;
+                }
                 String date = entry.getKey();
                 TimeSeriesDaily stockData = entry.getValue();
                 String open = stockData.getOpen();
