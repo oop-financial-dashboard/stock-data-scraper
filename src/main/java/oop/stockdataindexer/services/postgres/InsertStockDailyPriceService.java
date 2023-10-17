@@ -7,9 +7,9 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class InsertStockDailyPriceService {
-    private final String url = "jdbc:postgresql://localhost:5432/postgres";
-    private final String user = "postgres";
-    private final String password = "mypassword";
+    private final String url = "jdbc:postgresql://ep-autumn-mud-09899474-pooler.us-east-2.aws.neon.tech/neondb";
+    private final String user = "sticker99";
+    private final String password = "CPQm9Apsjh6O";
     private static final String INSERT_USERS_SQL = "INSERT INTO stock_daily_price" +
             "  (symbol, open, high, low, close, volume, timestamp) VALUES " +
             " (?, ?, ?, ?, ?, ?, ?);";

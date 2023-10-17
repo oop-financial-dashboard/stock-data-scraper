@@ -3,6 +3,7 @@ import lombok.Data;
 import oop.stockdataindexer.models.StockListing;
 import oop.stockdataindexer.models.StockDailyPriceRow;
 import oop.stockdataindexer.models.alphaVantage.AlphaVantageDailyPrice;
+import oop.stockdataindexer.models.alphaVantage.TimeSeriesDaily;
 import oop.stockdataindexer.services.postgres.CreateStockDailyPricesTableService;
 import oop.stockdataindexer.services.postgres.InsertStockDailyPriceService;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -29,7 +30,8 @@ public class FrontfillService {
         Stocks.forEach((stock) -> {
             String symbol = stock.getSymbol();
             RestTemplate restTemplate = new RestTemplate();
-            String apiUrl = String.format("https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=%s&apikey=PGMGQLXTQWX42V8V&outputsize=compact", symbol);
+            String apiKey = "2HGPQ27GH9K7PAPC";
+            String apiUrl = String.format("https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=%s&apikey=%s&outputsize=compact", symbol, apiKey);
             AlphaVantageDailyPrice res = restTemplate.getForObject(apiUrl, AlphaVantageDailyPrice.class);
             //TODO: throw error
             if(res == null || res.getMetaData() == null){
@@ -39,22 +41,18 @@ public class FrontfillService {
             }
 
             String lastRefreshed = res.getMetaData().getLastRefreshed();
-            String open = res.getTimeSeriesDailyMap().get(lastRefreshed).getOpen();
-            String high = res.getTimeSeriesDailyMap().get(lastRefreshed).getHigh();
-            String low = res.getTimeSeriesDailyMap().get(lastRefreshed).getLow();
-            String close = res.getTimeSeriesDailyMap().get(lastRefreshed).getClose();
-            String volume = res.getTimeSeriesDailyMap().get(lastRefreshed).getVolume();
-            String dateFormat = res.getMetaData().getLastRefreshed();
-            LocalDate date = LocalDate.parse(dateFormat);
+            TimeSeriesDaily dailyStockData = res.getTimeSeriesDailyMap().get(lastRefreshed);
+            LocalDate formattedDate = LocalDate.parse(lastRefreshed);
 
-            StockDailyPriceRow row = new StockDailyPriceRow();
-            row.setSymbol(symbol);
-            row.setOpen(open);
-            row.setHigh(high);
-            row.setLow(low);
-            row.setClose(close);
-            row.setVolume(volume);
-            row.setTimestamp(date);
+            StockDailyPriceRow row = StockDailyPriceRow.builder()
+                    .symbol(symbol)
+                    .open(dailyStockData.getOpen())
+                    .close(dailyStockData.getClose())
+                    .high(dailyStockData.getHigh())
+                    .low(dailyStockData.getLow())
+                    .volume(dailyStockData.getVolume())
+                    .timestamp(formattedDate)
+                    .build();
             InsertStockDailyPriceService insertStockDailyPriceService = new InsertStockDailyPriceService(row);
             //TODO: write exceptions
             try {

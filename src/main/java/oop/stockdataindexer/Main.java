@@ -29,26 +29,13 @@ public class Main extends SpringBootServletInitializer {
 		return new StockDescriptionScrapingService();
 	}
 
-//	@Bean
-//	public CreateStockDailyPricesTableService createStockDailyPricesTableService(){
-//		return new CreateStockDailyPricesTableService();
-//	}
-//
-//	@Bean
-//	public CreateStockDescriptionTableService createStockDescriptionTableService(){
-//		return new CreateStockDescriptionTableService();
-//	}
-	public static void main(String[] args) throws SQLException, IOException {
+	public static void main(String[] args) throws IOException, SQLException {
 
 		SpringApplication.run(Main.class, args);
-		CreateStockDailyPricesTableService createStockDailyPricesTable = new CreateStockDailyPricesTableService();
-		CreateStockDescriptionTableService createStockDescriptionTable = new CreateStockDescriptionTableService();
 		BackfillService backfillService = new BackfillService();
 		StockDescriptionScrapingService stockDescriptionScrapingService = new StockDescriptionScrapingService();
-		createStockDailyPricesTable.createTable();
-		createStockDescriptionTable.createTable();
 		backfillService.backfill();
-		stockDescriptionScrapingService.ScrapeStockDescriptions();
+//		stockDescriptionScrapingService.ScrapeStockDescriptions();
 	}
 
 }
