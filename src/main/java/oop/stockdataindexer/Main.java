@@ -35,7 +35,7 @@ public class Main extends SpringBootServletInitializer {
 		BackfillService backfillService = new BackfillService();
 		StockDescriptionScrapingService stockDescriptionScrapingService = new StockDescriptionScrapingService();
 		backfillService.backfill();
-//		stockDescriptionScrapingService.ScrapeStockDescriptions();
+		stockDescriptionScrapingService.ScrapeStockDescriptions();
 	}
 
 }

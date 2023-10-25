@@ -19,14 +19,16 @@ public class StockDescriptionScrapingService {
     public void ScrapeStockDescriptions() throws IOException {
         System.out.println("DESCRIPTION SCRAPPER RUNNING");
         CSVReaderService x = new CSVReaderService();
-        ArrayList<StockListing> Stocks = x.readCSV("src/main/resources/listing_status.csv");
+        ArrayList<StockListing> Stocks = x.readCSV("src/main/resources/top50.csv");
         Stocks.forEach((stock)->{
             String symbol = stock.getSymbol();
             RestTemplate restTemplate = new RestTemplate();
-            String apiUrl = String.format("https://www.alphavantage.co/query?function=OVERVIEW&symbol=%s&apikey=PGMGQLXTQWX42V8V", symbol);
+            String apiKey = "2HGPQ27GH9K7PAPC";
+            String apiUrl = String.format("https://www.alphavantage.co/query?function=OVERVIEW&symbol=%s&apikey=%s", symbol, apiKey);
             StockDescriptionRow res = restTemplate.getForObject(apiUrl, StockDescriptionRow.class);
             //TODO: throw error
             if(res == null || res.getSymbol() == null){
+                System.out.print(res);
                 System.out.printf("Failed to retrieve stock description data: %s from AlphaVantage%n", stock.getSymbol());
                 return;
             }
