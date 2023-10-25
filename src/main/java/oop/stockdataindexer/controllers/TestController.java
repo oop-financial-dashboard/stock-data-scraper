@@ -16,7 +16,7 @@ public class TestController {
     @ResponseBody
     private String hello() throws IOException {
         CSVReaderService x = new CSVReaderService();
-        ArrayList<StockListing> y = x.readCSV("src/main/resources/nyse_listed.csv");
+        ArrayList<StockListing> y = x.readCSV("src/main/resources/top50.csv");
         return y.toString();
     }
 }

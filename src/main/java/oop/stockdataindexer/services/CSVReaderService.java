@@ -18,7 +18,7 @@ public class CSVReaderService {
     public ArrayList<StockListing> readCSV(String path) throws IOException {
         ArrayList<StockListing> stockSymbols = new ArrayList<>();
 
-        String[] HEADERS = { "symbol", "name", "exchange", "assetType", "ipoDate", "delistingDate", "status"};
+        String[] HEADERS = { "Symbol", "Name"};
 
         // Process data: Split CSV lines, filter, transform, and create NYSETicker objects
         try (Reader reader = new FileReader(path);
@@ -26,13 +26,8 @@ public class CSVReaderService {
 
             for (CSVRecord csvRecord : csvParser) {
                 StockListing stock = StockListing.builder()
-                        .symbol(csvRecord.get("symbol"))
-                        .name(csvRecord.get("name"))
-                        .exchange(csvRecord.get("exchange"))
-                        .assetType(csvRecord.get("assetType"))
-                        .ipoDate(csvRecord.get("ipoDate"))
-                        .delistingDate(csvRecord.get("delistingDate"))
-                        .status(csvRecord.get("status"))
+                        .symbol(csvRecord.get("Symbol"))
+                        .name(csvRecord.get("Name"))
                         .build();
                 stockSymbols.add(stock);
             }
