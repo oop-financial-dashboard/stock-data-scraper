@@ -10,10 +10,9 @@ import static oop.stockdataindexer.services.postgres.InsertStockDailyPriceServic
 public class GetLastIndexedDate {
     private final String url = "jdbc:postgresql://ep-autumn-mud-09899474-pooler.us-east-2.aws.neon.tech/neondb";
     private final String user = "sticker99";
-    private final String password = "CPQm9Apsjh6O";
+    private final String password = "4WfK9pJnaOoD";
 
-    private static final String SELECT_LATEST_DATE_SQL = "SELECT MAX(last_indexed_date) AS latest_date " +
-            "FROM available_stocks;";
+    private static final String SELECT_LATEST_DATE_SQL = "SELECT MAX(last_indexed_date) AS latest_date FROM available_stocks;";
 
     public void selectRecord() throws SQLException {
         // Step 1: Establishing a Connection
