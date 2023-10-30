@@ -42,7 +42,7 @@ public class BatchInsertRepository {
     public DriverManagerDataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUrl("jdbc:postgresql://ep-tight-bar-26500515-pooler.ap-southeast-1.aws.neon.tech/neondb");
+        dataSource.setUrl("jdbc:postgresql://ep-tight-bar-26500515-pooler.ap-southeast-1.aws.neon.tech/neondb?prepareThreshold=0");
         dataSource.setUsername("sticker99");
         dataSource.setPassword("4WfK9pJnaOoD");
         return dataSource;

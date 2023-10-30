@@ -9,9 +9,7 @@ public class GetLastIndexedDate {
     private final String url = "jdbc:postgresql://ep-tight-bar-26500515-pooler.ap-southeast-1.aws.neon.tech/neondb?prepareThreshold=0";
     private final String user = "sticker99";
     private final String password = "4WfK9pJnaOoD";
-
-    private static final String SELECT_LATEST_DATE_SQL = "SELECT MIN(last_indexed_date) " +
-            "FROM available_stocks LIMIT 1;";
+    private static final String SELECT_LATEST_DATE_SQL = "SELECT MAX(last_indexed_date) AS latest_date FROM available_stocks;";
 
     public LocalDate selectRecord() throws SQLException {
         // Step 1: Establishing a Connection

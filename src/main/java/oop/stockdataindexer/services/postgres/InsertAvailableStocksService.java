@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import static oop.stockdataindexer.services.postgres.InsertStockDailyPriceService.printSQLException;
 
 public class InsertAvailableStocksService {
-    private final String url = "jdbc:postgresql://ep-tight-bar-26500515-pooler.ap-southeast-1.aws.neon.tech/neondb?";
+    private final String url = "jdbc:postgresql://ep-tight-bar-26500515-pooler.ap-southeast-1.aws.neon.tech/neondb?prepareThreshold=0";
     private final String user = "sticker99";
     private final String password = "4WfK9pJnaOoD";
     private static final String INSERT_USERS_SQL = "INSERT INTO available_stocks" +
@@ -24,7 +24,6 @@ public class InsertAvailableStocksService {
     public void insertRecord() throws SQLException {
         // Step 1: Establishing a Connection
         try (Connection connection = DriverManager.getConnection(url, user, password);
-
              // Step 2:Create a statement using connection object
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USERS_SQL)) {
             preparedStatement.setString(1, this.availableStocksRow.getSymbol());
