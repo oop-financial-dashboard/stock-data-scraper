@@ -8,10 +8,10 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class InsertStockDescriptionService {
-    private final String url = "jdbc:postgresql://ep-autumn-mud-09899474-pooler.us-east-2.aws.neon.tech/neondb";
+    private final String url = "jdbc:postgresql://ep-tight-bar-26500515-pooler.ap-southeast-1.aws.neon.tech/neondb?prepareThreshold=0";
     private final String user = "sticker99";
-    private final String password = "CPQm9Apsjh6O";
-    private static final String INSERT_USERS_SQL = "INSERT INTO stock_description" +
+    private final String password = "4WfK9pJnaOoD";
+    private String INSERT_USERS_SQL = "INSERT INTO stock_description" +
             "  (symbol, exchange, currency, asset_type, name, description, country, sector, industry, fiscal_year_end, latest_quarter, market_capitalization, ebitda, pe_ratio, peg_ratio, book_value, dividend_per_share, dividend_yield, eps, revenue_per_sharettm, profit_margin, operating_marginttm, return_on_assetsttm, return_on_equityttm, revenuettm, gross_profitttm, dilutedepsttm, quarterly_earnings_growthyoy, quarterly_revenue_growthyoy, analyst_target_price, trailingpe, forwardpe, price_to_sales_ratiottm, price_to_book_ratio, ev_to_revenue, ev_toebitda, beta, _52week_high, _52week_low, _50day_moving_average, _200day_moving_average, shares_outstanding, dividend_date, ex_dividend_date) VALUES " +
             " (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 

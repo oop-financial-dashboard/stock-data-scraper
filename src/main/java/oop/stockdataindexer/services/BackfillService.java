@@ -73,6 +73,7 @@ public class BackfillService {
                 System.out.printf("Time taken for the batch insert in seconds ---> %d\n", timeElapse);
             } catch (Exception e) {
                 System.out.println(e.getCause());
+
             }
 
             if (lastIndexedDate != null) {

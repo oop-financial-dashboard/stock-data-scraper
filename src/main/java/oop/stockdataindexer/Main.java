@@ -1,6 +1,7 @@
 package oop.stockdataindexer;
 
 import oop.stockdataindexer.services.BackfillService;
+import oop.stockdataindexer.services.FrontfillService;
 import oop.stockdataindexer.services.StockDescriptionScrapingService;
 import oop.stockdataindexer.services.postgres.CreateStockDescriptionTableService;
 import org.springframework.boot.SpringApplication;
@@ -32,10 +33,12 @@ public class Main extends SpringBootServletInitializer {
 	public static void main(String[] args) throws IOException, SQLException {
 
 		SpringApplication.run(Main.class, args);
-		BackfillService backfillService = new BackfillService();
-		StockDescriptionScrapingService stockDescriptionScrapingService = new StockDescriptionScrapingService();
-		backfillService.backfill();
-		stockDescriptionScrapingService.ScrapeStockDescriptions();
+		FrontfillService frontfillService = new FrontfillService();
+//		BackfillService backfillService = new BackfillService();
+//		StockDescriptionScrapingService stockDescriptionScrapingService = new StockDescriptionScrapingService();
+//		backfillService.backfill();
+//		stockDescriptionScrapingService.ScrapeStockDescriptions();
+		frontfillService.frontfill();
 	}
 
 }
