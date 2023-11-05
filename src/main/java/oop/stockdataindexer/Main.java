@@ -33,12 +33,12 @@ public class Main extends SpringBootServletInitializer {
 	public static void main(String[] args) throws IOException, SQLException {
 
 		SpringApplication.run(Main.class, args);
-		FrontfillService frontfillService = new FrontfillService();
+//		FrontfillService frontfillService = new FrontfillService();
 //		BackfillService backfillService = new BackfillService();
 //		StockDescriptionScrapingService stockDescriptionScrapingService = new StockDescriptionScrapingService();
 //		backfillService.backfill();
 //		stockDescriptionScrapingService.ScrapeStockDescriptions();
-		frontfillService.frontfill();
+//		frontfillService.frontfill();
 	}
 
 }

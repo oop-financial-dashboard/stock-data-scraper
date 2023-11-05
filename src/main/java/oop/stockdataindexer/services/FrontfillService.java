@@ -23,7 +23,7 @@ import java.util.Map;
 public class FrontfillService {
 
 //    @Scheduled(cron = "* * * ? * MON-FRI")
-    @Scheduled(cron = "* 30 4 * * ?")
+    @Scheduled(cron = "0 0 7 * * *")
     public void frontfill() throws IOException, SQLException {
         System.out.println("FRONTFILL IS RUNNING");
         CSVReaderService x = new CSVReaderService();
