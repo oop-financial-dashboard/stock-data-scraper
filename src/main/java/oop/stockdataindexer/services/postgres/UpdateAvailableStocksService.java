@@ -23,13 +23,11 @@ public class UpdateAvailableStocksService {
     public void updateLastIndexedDate() throws SQLException {
         // Step 1: Establishing a Connection
         try (Connection connection = DriverManager.getConnection(url, user, password);
-
              // Step 2:Create a statement using connection object
              PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_USERS_SQL)) {
             java.sql.Date sqlDate = java.sql.Date.valueOf(this.availableStocksRow.getLastIndexedDate());
             preparedStatement.setDate(1, sqlDate);
             preparedStatement.setString(2, this.availableStocksRow.getSymbol());
-            System.out.println("HELLO I TRIED TO EXECUTE UPDATE");
             System.out.println(preparedStatement);
             // Step 3: Execute the query or update query
             preparedStatement.executeUpdate();

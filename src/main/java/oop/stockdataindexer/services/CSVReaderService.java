@@ -20,7 +20,7 @@ public class CSVReaderService {
 
         String[] HEADERS = { "Symbol", "Name"};
 
-        // Process data: Split CSV lines, filter, transform, and create NYSETicker objects
+        // Process data: Split CSV lines, filter, transform, and create objects
         try (Reader reader = new FileReader(path);
              CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT.builder().setHeader(HEADERS).setSkipHeaderRecord(true).build())) {
 

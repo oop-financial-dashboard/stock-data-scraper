@@ -22,7 +22,6 @@ import java.util.Map;
 @Component
 public class FrontfillService {
 
-//    @Scheduled(cron = "* * * ? * MON-FRI")
     @Scheduled(cron = "0 0 7 * * *")
     public void frontfill() throws IOException, SQLException {
         System.out.println("FRONTFILL IS RUNNING");
@@ -36,10 +35,9 @@ public class FrontfillService {
             LocalDate newLastIndexedDate = null;
             boolean firstIteration = true;
             RestTemplate restTemplate = new RestTemplate();
-            String apiKey = "2HGPQ27GH9K7PAPC";
+            String apiKey = "PGMGQLXTQWX42V8V";
             String apiUrl = String.format("https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=%s&apikey=%s&outputsize=compact", symbol, apiKey);
             AlphaVantageDailyPrice res = restTemplate.getForObject(apiUrl, AlphaVantageDailyPrice.class);
-            //TODO: throw error
             if(res == null || res.getMetaData() == null){
                 System.out.println("Failed to retireve daily stock price data from AlphaVantage");
                 System.out.println(stock.getSymbol());
@@ -67,7 +65,6 @@ public class FrontfillService {
                         .build();
                 stockDailyPriceRowList.add(row);
             }
-            //TODO: write exceptions
             try {
                 BatchInsertRepository batchInsertRepository = new BatchInsertRepository();
                 Long startTime = System.nanoTime();

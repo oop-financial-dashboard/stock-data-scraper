@@ -11,7 +11,7 @@ public class GetLastIndexedDate {
     private final String password = "4WfK9pJnaOoD";
     private static final String SELECT_LATEST_DATE_SQL = "SELECT MAX(last_indexed_date) AS latest_date FROM available_stocks;";
 
-    public LocalDate selectRecord() throws SQLException {
+    public LocalDate selectRecord() {
         // Step 1: Establishing a Connection
         try (Connection connection = DriverManager.getConnection(url, user, password);
 
@@ -35,20 +35,5 @@ public class GetLastIndexedDate {
         // Step 4: try-with-resource statement will auto close the connection.
 
         return null;
-    }
-    static void SQLException(SQLException ex) {
-        for (Throwable e: ex) {
-            if (e instanceof SQLException) {
-                e.printStackTrace(System.err);
-                System.err.println("SQLState: " + ((SQLException) e).getSQLState());
-                System.err.println("Error Code: " + ((SQLException) e).getErrorCode());
-                System.err.println("Message: " + e.getMessage());
-                Throwable t = ex.getCause();
-                while (t != null) {
-                    System.out.println("Cause: " + t);
-                    t = t.getCause();
-                }
-            }
-        }
     }
 }

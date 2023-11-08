@@ -33,10 +33,9 @@ public class BackfillService {
             String symbol = stock.getSymbol();
             String name = stock.getName();
             RestTemplate restTemplate = new RestTemplate();
-            String apiKey = "2HGPQ27GH9K7PAPC";
+            String apiKey = "PGMGQLXTQWX42V8V";
             String apiUrl = String.format("https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=%s&apikey=%s&outputsize=full", symbol, apiKey);
             AlphaVantageDailyPrice res = restTemplate.getForObject(apiUrl, AlphaVantageDailyPrice.class);
-            //TODO: throw error
             if (res == null || res.getMetaData() == null) {
                 System.out.printf("Failed to retrieve daily stock price data: %s from AlphaVantage\n", stock.getSymbol());
                 return;
@@ -82,7 +81,6 @@ public class BackfillService {
                 try {
                     service.insertRecord();
                 } catch (SQLException e) {
-                    //TODO: write exception
                     throw new RuntimeException(e);
                 }
             }
